@@ -84,7 +84,7 @@ module Xteam
 
                     Dir.chdir(@name)
                     # # Pod Update
-                    # `cd #{@name} && pod update`
+                    `pod update`
 
                     # Git重新初始化
                     `rm -rf .git`
