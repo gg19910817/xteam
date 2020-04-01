@@ -5,7 +5,7 @@ module Xteam
 
   class Command < CLAide::Command
 
-    require_relative('./command/create/iOS.rb')
+    require_relative('./command/create.rb')
 
     self.abstract_command = true
     self.command = 'xteam'
