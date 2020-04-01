@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
-require "xteam"
+
+require_relative("../lib/xteam/command.rb")
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
@@ -10,5 +11,12 @@ require "xteam"
 # require "pry"
 # Pry.start
 
-require "irb"
-IRB.start(__FILE__)
+# require "irb"
+# IRB.start(__FILE__)
+
+$current_dir = File.dirname(File.expand_path(__FILE__))
+Dir[File.join($current_dir, "lib/xteam/*.rb")].each do |file|
+  require_relative(file)
+end
+
+Xteam::Command.run(ARGV)
