@@ -82,14 +82,15 @@ module Xteam
                         File.rename(project_folder + "/TEMPLATEUITests", project_folder + "/" + @name + "UITests")
                     end
 
+                    Dir.chdir(@name)
                     # # Pod Update
                     # `cd #{@name} && pod update`
 
                     # Git重新初始化
-                    `cd #{@name} && rm -rf .git`
-                    `cd #{@name} && git init`
-                    `cd #{@name} && git add .`
-                    `cd #{@name} && git commit -m "first commit"`
+                    `rm -rf .git`
+                    `git init`
+                    `git add .`
+                    `git commit -m "first commit"`
                 end
             end
         end
