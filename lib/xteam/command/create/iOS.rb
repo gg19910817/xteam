@@ -30,7 +30,12 @@ module Xteam
                 end
 
                 def run
-                    puts  @name,@objc
+                    project_folder = "./#{@name}"
+                    # 先判断是否存在指定文件夹
+                    if Dir.exist? project_folder
+                        puts "文件夹已经存在，请先删除或移动。".red
+                        return
+                    end
                 end
             end
         end
