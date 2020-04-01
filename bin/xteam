@@ -14,9 +14,4 @@ require_relative("../lib/xteam/command.rb")
 # require "irb"
 # IRB.start(__FILE__)
 
-$current_dir = File.dirname(File.expand_path(__FILE__))
-Dir[File.join($current_dir, "lib/xteam/*.rb")].each do |file|
-  require_relative(file)
-end
-
 Xteam::Command.run(ARGV)
