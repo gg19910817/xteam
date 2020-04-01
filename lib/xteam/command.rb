@@ -5,6 +5,7 @@ module Xteam
 
   class Command < CLAide::Command
 
+    require_relative('./version.rb')
     require_relative('./command/create.rb')
 
     self.abstract_command = true
