@@ -18,12 +18,19 @@ module Xteam
                 end
 
                 def initialize(argv)
+                    @name = argv.shift_argument
                     super
                     @objc = argv.flag?('objc', false)
                 end
         
+                def validate!
+                    super
+                    help! '输入项目名称' unless @name
+                    help! '项目名必须大于等于四个字符' if @name.length < 4
+                end
+
                 def run
-                    puts 
+                    puts  @name,@objc
                 end
             end
         end
