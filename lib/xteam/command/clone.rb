@@ -26,10 +26,20 @@ module Xteam
                 case @name.to_sym
                     when :ios
                         @tempale_name = "iOSTemplate"
+                    when :objc
+                        @tempale_name = "ObjcTemplate"
                     when :scrapy
                         @tempale_name = "ScrapyTemplate"
                     when :egg
                         @tempale_name = "EggTemplate"
+                    when :xteam
+                        @tempale_name = "xteam"
+                    when :scripts
+                        @tempale_name = "Scripts"
+                    when :keychain
+                        @tempale_name = "keychain"
+                    when :snippets
+                        @tempale_name = "SwiftCodeSnippets"
                 end
 
                 unless @tempale_name.length > 0
