@@ -2,6 +2,8 @@ module Xteam
     class Command
         class Create < Command
             require_relative('./create/ios.rb')
+            require_relative('./create/scrapy.rb')
+            require_relative('./create/egg.rb')
 
             self.abstract_command = true
             self.summary = '创建iOS，Android，Vue，Egg，Flutter基础工程'

@@ -1,10 +1,10 @@
 module Xteam
     class Command
         class Create < Command
-            class Scrapy < Create
-                self.summary = 'scrapy项目创建工具'
+            class IOS < Create
+                self.summary = 'Egg项目创建工具'
                 self.description = <<-DESC
-                scrapy项目创建工具
+                Egg项目创建工具
                 DESC
                 
                 self.arguments = [
@@ -30,14 +30,15 @@ module Xteam
                         return
                     end
 
-                    `git clone https://github.com/gg19910817/ScrapyTemplate #{@name}`
+                    `git clone https://github.com/gg19910817/EggTemplate #{@name}`
 
                     # 获取github的名字
                     github_user_name = `security find-internet-password -s github.com | grep acct | sed 's/"acct"<blob>="//g' | sed 's/"//g'`.strip
+                    project_owner = github_user_name
 
                     string_replacements = {
                         "TEMPLATE" => @name,
-                        "Template" => @name
+                        "PROJECT_OWNER" => project_owner
                     }
 
                     # 这里从所有文件中替换掉模版中的名称
@@ -50,11 +51,6 @@ module Xteam
                         end
 
                         File.open(name, "w") { |file| file.puts text }
-                    end
-
-                    # 修改文件夹的名称
-                    if Dir.exist? project_folder + "/TEMPLATE"
-                        File.rename(project_folder + "/TEMPLATE", project_folder + "/" + @name)
                     end
 
                     Dir.chdir(@name)
