@@ -2,37 +2,39 @@ module Xteam
     class Command
         class Template < Command
 
-            self.summary = '模版工具'
+            require_relative("../../../tool/tool.rb")
+
+            self.summary = '模版代码生成工具'
             self.description = <<-DESC
-            模版工具
+            对指定的项目，生成模版代码。
             DESC
             
             self.arguments = [
-                CLAide::Argument.new('NAME', true),
+                CLAide::Argument.new('PROJECT_PATH', true),
             ]
 
             def initialize(argv)
-                @name = argv.shift_argument
+                # 这里可能获取到一个相对路径
+                @project_path = argv.shift_argument
                 super
             end
     
             def validate!
                 super
-                help! '输入项目名称' unless @name
+                help! '输入项目路径' unless @project_path
             end
 
             def run
-                @project_folder = "./#{@name}"
+                @relative_path = "./#{@project_path}"
                 # 先判断是否存在指定文件夹
-                unless Dir.exist? @project_folder
-                    puts "文件夹不存在".red
+                unless Dir.exist? @relative_path
+                    puts "此项目路径找不到项目".red
                     return
                 end
 
-                @project_name = @name.split("/").last
-
-                if File.exist? @project_folder + "/Podfile"
-                    puts "发现Podfile".yellow
+                @project_name = @project_path.split("/").last
+                if File.exist? File.join(@relative_path, @project_name + ".xcodeproj")
+                    puts "发现iOS工程文件".yellow
                     @type = :swift
                 end
 
@@ -53,7 +55,7 @@ module Xteam
                 todays_year = Time.now.year.to_s
 
                 ios_path = File.expand_path("../../../../snippets/ios/", __FILE__)
-                kind = ask_with_answers("输入模版", ["Table", "Collection", "Scroll"]).to_sym
+                kind = Tool.new.ask_with_answers("输入模版", ["Table", "Collection", "Scroll"]).to_sym
                 case kind
                 when :table
                     snippets_path = ios_path + "/TABLE"
@@ -64,10 +66,13 @@ module Xteam
                 else
                 end
 
-                @name = ask("输入名称").capitalize
+                page_name = Tool.new.ask("输入名称")
+                puts "CamelCasedName".underscore
+                page_name_list = page_name.split("-").map { |e| return e.capitalize }
+                puts page_name_list
 
                 string_replacements = {
-                    "TABLE" => @name,
+                    "TABLE" => page_name,
                     "PROJECT_OWNER" => project_owner,
                     "OWNER_TEAM" => owner_team,
                     "TODAYS_DATE" => todays_date,
@@ -75,8 +80,16 @@ module Xteam
                 }
 
                 # 这里从所有文件中替换掉模版中的名称
-                puts snippets_path
+                dir_path = File.join(@relative_path, @project_name, "Pages", page_name_list)
+                    if Dir.exists? dir_path
+                        puts "项目中已经存在指定Page".red
+                        return
+                    end
+                Dir.mkdir(dir_path)
                 Dir.foreach(snippets_path) do |name|
+
+                    puts name
+
                     next if Dir.exists? name
                     text = File.read(File.join(snippets_path, name))
 
@@ -84,12 +97,6 @@ module Xteam
                         text = text.gsub(find, replace)
                     end
 
-                    dir_path = File.join(@project_folder, @project_name, "Pages", @name)
-                    if Dir.exists? dir_path
-                        puts "项目中已经存在指定Page".red
-                        return
-                    end
-                    Dir.mkdir(dir_path)
                     File.open(File.join(dir_path, name.gsub("TABLE", @name)), "w") { |file| file.puts text }
                 end
 
