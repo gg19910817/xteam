@@ -7,6 +7,7 @@ module Xteam
 
     require_relative('./version.rb')
     require_relative('./command/create.rb')
+    require_relative('./command/clone.rb')
 
     self.abstract_command = true
     self.command = 'xteam'
