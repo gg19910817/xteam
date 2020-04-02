@@ -1,7 +1,7 @@
 module Xteam
     class Command
         class Create < Command
-            class IOS < Create
+            class Egg < Create
                 self.summary = 'Egg项目创建工具'
                 self.description = <<-DESC
                 Egg项目创建工具
@@ -12,7 +12,7 @@ module Xteam
                 ]
 
                 def initialize(argv)
-                    @name = argv.shift_argument.capitalize
+                    @name = argv.shift_argument
                     super
                 end
         
@@ -29,6 +29,8 @@ module Xteam
                         puts "文件夹已经存在，请先删除或移动。".red
                         return
                     end
+
+                    @name = @name.capitalize
 
                     `git clone https://github.com/gg19910817/EggTemplate #{@name}`
 
