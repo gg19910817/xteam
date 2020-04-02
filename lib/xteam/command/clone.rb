@@ -55,7 +55,7 @@ module Xteam
                     return
                 end
 
-                `git clone https://github.com/gg19910817/EggTemplate #{@name}`
+                `git clone https://github.com/gg19910817/#{@name}`
 
             end
         end
