@@ -68,7 +68,7 @@ class TABLEPage: Page, UITableViewDelegate {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        table.pin.all(0)
+        table.pin.all(view.pin.safeArea)
     }
 
 }
