@@ -1,8 +1,11 @@
+require 'xcodeproj'
+
 module Xteam
     class Command
         class Template < Command
 
             require_relative("../../../tool/tool.rb")
+            require_relative("../../../tool/xcode.rb")
 
             self.summary = '模版代码生成工具'
             self.description = <<-DESC
@@ -33,7 +36,8 @@ module Xteam
                 end
 
                 @project_name = @project_path.split("/").last
-                if File.exist? File.join(@relative_path, @project_name + ".xcodeproj")
+                @xcodeproj_path = File.join(@relative_path, @project_name + ".xcodeproj")
+                if File.exist? @xcodeproj_path
                     puts "发现iOS工程文件".yellow
                     @type = :swift
                 end
@@ -84,7 +88,9 @@ module Xteam
                     puts "项目中已经存在指定Page".red
                     return
                 end
-                `mkdir -p #{dir_path}`
+
+                Xcode.save(@project_path, snippets_path, File.join("Pages", page_name_list))
+
                 Dir.foreach(snippets_path) do |name|
                     next if Dir.exists? name
                     text = File.read(File.join(snippets_path, name))
