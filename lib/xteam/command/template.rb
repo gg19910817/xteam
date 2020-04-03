@@ -66,12 +66,11 @@ module Xteam
                 else
                 end
 
-                page_name = Tool.new.ask("输入名称")
-                puts "CamelCasedName".underscore
-                page_name_list = page_name.split("-").map { |e| return e.capitalize }
-                puts page_name_list
+                page_name = Tool.new.ask("输入名称")  
+                page_name_list = page_name.gsub(/(?=[A-Z])/, " ").split(" ")
 
                 string_replacements = {
+                    "TEMPLATE" => @project_name,
                     "TABLE" => page_name,
                     "PROJECT_OWNER" => project_owner,
                     "OWNER_TEAM" => owner_team,
@@ -79,17 +78,14 @@ module Xteam
                     "TODAYS_YEAR" => todays_year
                 }
 
-                # 这里从所有文件中替换掉模版中的名称
+                # 这里在xcode项目中写入文件和文件夹，还需要修改xcodeproj文件
                 dir_path = File.join(@relative_path, @project_name, "Pages", page_name_list)
-                    if Dir.exists? dir_path
-                        puts "项目中已经存在指定Page".red
-                        return
-                    end
-                Dir.mkdir(dir_path)
+                if Dir.exists? dir_path
+                    puts "项目中已经存在指定Page".red
+                    return
+                end
+                `mkdir -p #{dir_path}`
                 Dir.foreach(snippets_path) do |name|
-
-                    puts name
-
                     next if Dir.exists? name
                     text = File.read(File.join(snippets_path, name))
 
@@ -97,7 +93,7 @@ module Xteam
                         text = text.gsub(find, replace)
                     end
 
-                    File.open(File.join(dir_path, name.gsub("TABLE", @name)), "w") { |file| file.puts text }
+                    File.open(File.join(dir_path, name.gsub("TABLE", page_name)), "w") { |file| file.puts text }
                 end
 
             end
