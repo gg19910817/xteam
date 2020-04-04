@@ -14,7 +14,6 @@ import PinLayout
 class TABLEPageCell: UITableViewCell, Reusable {
     
     lazy var panel = Panel().then {
-        $0.setContentHuggingPriority(.required, for: .vertical)
         contentView.addSubview($0)
     }
     
@@ -38,6 +37,7 @@ class TABLEPageCell: UITableViewCell, Reusable {
     }
     
     lazy var social = SocialView().then {
+        $0.setContentHuggingPriority(.required, for: .vertical)
         panel.addSubview($0)
     }
     
@@ -124,7 +124,7 @@ class SocialView: UIView {
     }
     
     override var intrinsicContentSize: CGSize {
-        return .init(width: 0, height: 20)
+        return .init(width: UIView.noIntrinsicMetric, height: 20)
     }
 
 }
@@ -159,7 +159,7 @@ class ProfileView: UIView {
     }
     
     override var intrinsicContentSize: CGSize {
-        return .init(width: 0, height: 30)
+        return .init(width: UIView.noIntrinsicMetric, height: 30)
     }
 
 }
