@@ -9,6 +9,7 @@
 import UIKit
 import Reusable
 import SnapKit
+import PinLayout
 
 class TABLEPageCell: UITableViewCell, Reusable {
     
@@ -24,10 +25,19 @@ class TABLEPageCell: UITableViewCell, Reusable {
         panel.addSubview($0)
     }
     
+    lazy var profile = ProfileView().then {
+        $0.setContentHuggingPriority(.required, for: .vertical)
+        panel.addSubview($0)
+    }
+    
     lazy var detail = UILabel().then {
         $0.text = "setContentHuggingPrioritysetContentHuggingPrioritysetContentHuggingPrioritysetContentHuggingPrioritysetContentHuggingPrioritysetContentHuggingPriority"
         $0.numberOfLines = 5
         $0.setContentHuggingPriority(.required, for: .vertical)
+        panel.addSubview($0)
+    }
+    
+    lazy var social = SocialView().then {
         panel.addSubview($0)
     }
     
@@ -47,11 +57,23 @@ class TABLEPageCell: UITableViewCell, Reusable {
             make.top.equalTo(_THEME.size.panel_padding)
         }
         
-        detail.snp.makeConstraints { (make) in
+        profile.snp.makeConstraints { (make) in
             make.left.equalTo(_THEME.size.panel_padding)
             make.right.equalTo(-_THEME.size.panel_padding)
             make.top.equalTo(title.snp.bottom).offset(_THEME.size.inset_padding)
+        }
+        
+        detail.snp.makeConstraints { (make) in
+            make.left.equalTo(_THEME.size.panel_padding)
+            make.right.equalTo(-_THEME.size.panel_padding)
+            make.top.equalTo(profile.snp.bottom).offset(_THEME.size.inset_padding)
+        }
+        
+        social.snp.makeConstraints { (make) in
+            make.left.equalTo(_THEME.size.panel_padding)
+            make.right.equalTo(-_THEME.size.panel_padding)
             make.bottom.equalTo(-_THEME.size.panel_padding)
+            make.top.equalTo(detail.snp.bottom).offset(_THEME.size.inset_padding)
         }
         
     }
@@ -75,3 +97,69 @@ class TABLEPageCell: UITableViewCell, Reusable {
 
 }
 
+class SocialView: UIView {
+
+    lazy var agreement = UILabel().then {
+        $0.text = "agreement"
+        addSubview($0)
+    }
+    
+    lazy var comment = UILabel().then {
+        $0.text = "agreement"
+        addSubview($0)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        agreement.pin.left().vCenter().sizeToFit()
+        comment.pin.after(of: agreement).marginLeft(_THEME.size.inset_padding).vCenter().sizeToFit()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        return .init(width: 0, height: 20)
+    }
+
+}
+
+class ProfileView: UIView {
+
+    lazy var avatar = UIImageView().then {
+        // Tips
+        // iOS11以后圆角已不再触发离屏渲染
+        $0.layer.cornerRadius = 15
+        $0.backgroundColor = .red
+        addSubview($0)
+    }
+    
+    lazy var name = UILabel().then {
+        $0.text = "马化腾"
+        addSubview($0)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        avatar.pin.size(.init(width: 30, height: 30)).left().vCenter()
+        name.pin.after(of: avatar).marginLeft(_THEME.size.inset_padding).vCenter().sizeToFit()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        return .init(width: 0, height: 30)
+    }
+
+}
