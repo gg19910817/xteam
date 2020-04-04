@@ -12,7 +12,7 @@ import RxDataSources
 class TABLEViewModel: ViewModel {
     let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Double>>(
         configureCell: { (_, tableView, indexPath, element) in
-            let cell:HomeIndexPageCell = tableView.dequeueReusableCell(for: indexPath)
+            let cell:TABLEPageCell = tableView.dequeueReusableCell(for: indexPath)
             return cell
         }
     )

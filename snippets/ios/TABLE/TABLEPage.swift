@@ -21,7 +21,7 @@ class TABLEPage: Page, UITableViewDelegate {
         $0.tableFooterView = UIView()
         $0.backgroundColor = .clear
         $0.separatorStyle = .none
-        $0.register(cellType: HomeIndexPageCell.self)
+        $0.register(cellType: TABLEPageCell.self)
         view.addSubview($0)
     }
     
