@@ -12,12 +12,8 @@ import RxDataSources
 class TABLEViewModel: ViewModel {
     let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Double>>(
         configureCell: { (_, tableView, indexPath, element) in
-            let cell:TABLEPageCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.textLabel?.text = "\(element) @ row \(indexPath.row)"
+            let cell:HomeIndexPageCell = tableView.dequeueReusableCell(for: indexPath)
             return cell
-        },
-        titleForHeaderInSection: { dataSource, sectionIndex in
-            return dataSource[sectionIndex].model
         }
     )
 }

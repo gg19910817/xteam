@@ -19,14 +19,32 @@ class TABLEPage: Page, UITableViewDelegate {
         $0.showsVerticalScrollIndicator = false
         $0.showsHorizontalScrollIndicator = false
         $0.tableFooterView = UIView()
-        $0.register(cellType: TABLEPageCell.self)
+        $0.backgroundColor = .clear
+        $0.separatorStyle = .none
+        $0.register(cellType: HomeIndexPageCell.self)
         view.addSubview($0)
     }
     
     lazy var viewModel = TABLEViewModel()
 
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        tabBarItem = .init(
+            title: _THEME.string.local("Home"),
+            image: _THEME.iconFont.image(string: "\u{e622}", size: _THEME.size.tabIcon),
+            selectedImage: _THEME.iconFont.image(string: "\u{e622}", size: _THEME.size.tabIcon)
+        )
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = _THEME.string.local("Home")
 
         // Do any additional setup after loading the view.
         let items = Observable.just([
@@ -58,6 +76,7 @@ class TABLEPage: Page, UITableViewDelegate {
                 return (indexPath, self.viewModel.dataSource[indexPath])
             }
             .subscribe(onNext: { pair in
+                _ROUTER.push("native://home/detail")
             })
             .disposed(by: viewModel.disposeBag)
 
