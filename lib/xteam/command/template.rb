@@ -75,8 +75,7 @@ module Xteam
 
                 string_replacements = {
                     "TEMPLATE" => @project_name,
-                    "TABLE" => page_name,
-                    "NAME" => page_name,
+                    "N_A_M_E" => page_name,
                     "PROJECT_OWNER" => project_owner,
                     "OWNER_TEAM" => owner_team,
                     "TODAYS_DATE" => todays_date,
