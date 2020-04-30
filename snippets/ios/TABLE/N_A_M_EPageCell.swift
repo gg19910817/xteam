@@ -1,5 +1,5 @@
 //
-//  TABLEPageCell.swift
+//  N_A_M_EPageCell.swift
 //  TEMPLATE
 //
 //  Created by PROJECT_OWNER on TODAYS_DATE.
@@ -11,7 +11,7 @@ import Reusable
 import SnapKit
 import PinLayout
 
-class TABLEPageCell: UITableViewCell, Reusable {
+class N_A_M_EPageCell: UITableViewCell, Reusable {
     
     lazy var panel = Panel().then {
         contentView.addSubview($0)

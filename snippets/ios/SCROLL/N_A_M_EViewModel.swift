@@ -1,5 +1,5 @@
 //
-//  NAMEViewModel.swift
+//  N_A_M_EViewModel.swift
 //  TEMPLATE
 //
 //  Created by PROJECT_OWNER on TODAYS_DATE.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-class NAMEViewModel: ViewModel {
+class N_A_M_EViewModel: ViewModel {
 
 }

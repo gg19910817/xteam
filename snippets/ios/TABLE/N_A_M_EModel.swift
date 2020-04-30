@@ -1,5 +1,5 @@
 //
-//  TABLEModel.swift
+//  N_A_M_EModel.swift
 //  TEMPLATE
 //
 //  Created by PROJECT_OWNER on TODAYS_DATE.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TABLEModel: Model {
+class N_A_M_EModel: Model {
     var title: String?
     var author: User?
     var detail: String?

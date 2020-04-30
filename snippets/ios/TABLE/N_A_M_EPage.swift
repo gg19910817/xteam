@@ -1,5 +1,5 @@
 //
-//  TABLEPage.swift
+//  N_A_M_EPage.swift
 //  TEMPLATE
 //
 //  Created by PROJECT_OWNER on TODAYS_DATE.
@@ -13,7 +13,7 @@ import RxDataSources
 import NSObject_Rx
 import PinLayout
 
-class TABLEPage: Page, UITableViewDelegate {
+class N_A_M_EPage: Page, UIN_A_M_EViewDelegate {
 
     lazy var table = UITableView().then {
         $0.showsVerticalScrollIndicator = false
@@ -21,11 +21,11 @@ class TABLEPage: Page, UITableViewDelegate {
         $0.tableFooterView = UIView()
         $0.backgroundColor = .clear
         $0.separatorStyle = .none
-        $0.register(cellType: TABLEPageCell.self)
+        $0.register(cellType: N_A_M_EPageCell.self)
         view.addSubview($0)
     }
     
-    lazy var viewModel = TABLEViewModel()
+    lazy var viewModel = N_A_M_EViewModel()
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)

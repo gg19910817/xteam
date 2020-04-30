@@ -1,5 +1,5 @@
 //
-//  NAMEModel.swift
+//  N_A_M_EModel.swift
 //  TEMPLATE
 //
 //  Created by PROJECT_OWNER on TODAYS_DATE.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-class NAMEModel: Model {
+class N_A_M_EModel: Model {
 
 }

@@ -1,5 +1,5 @@
 //
-//  TABLEPage.swift
+//  N_A_M_EPage.swift
 //  TEMPLATE
 //
 //  Created by PROJECT_OWNER on TODAYS_DATE.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NAMEPage: Page {
+class N_A_M_EPage: Page {
 
     /*
      1. lazy属性，会在调用属性时才初始化（这个操作线程不安全）。
@@ -18,13 +18,13 @@ class NAMEPage: Page {
     private lazy var content = UIScrollView().then {
         view.addSubview($0)
     }
-    private lazy var top = NAMETop().then {
+    private lazy var top = N_A_M_ETop().then {
         content.addSubview($0)
     }
-    private lazy var middle = NAMEMiddle().then {
+    private lazy var middle = N_A_M_EMiddle().then {
         content.addSubview($0)
     }
-    private lazy var bottom = NAMEBottom().then {
+    private lazy var bottom = N_A_M_EBottom().then {
         content.addSubview($0)
     }
     

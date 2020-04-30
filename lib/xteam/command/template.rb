@@ -100,7 +100,7 @@ module Xteam
                         text = text.gsub(find, replace)
                     end
 
-                    File.open(File.join(dir_path, name.gsub("TABLE", page_name)), "w") { |file| file.puts text }
+                    File.open(File.join(dir_path, name.gsub("N_A_M_E", page_name)), "w") { |file| file.puts text }
                 end
 
             end

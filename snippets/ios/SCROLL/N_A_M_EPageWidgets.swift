@@ -1,5 +1,5 @@
 //
-//  NAMEPageWidgets.swift
+//  N_A_M_EPageWidgets.swift
 //  TEMPLATE
 //
 //  Created by PROJECT_OWNER on TODAYS_DATE.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NAMETop: View {
+class N_A_M_ETop: View {
     
     /*
      1. lazy属性，会在调用属性时才初始化（这个操作线程不安全）。
@@ -45,7 +45,7 @@ class NAMETop: View {
 
 }
 
-class NAMEMiddle: View {
+class N_A_M_EMiddle: View {
     
     private lazy var phone = AntInput().then {
         addSubview($0)
@@ -77,7 +77,7 @@ class NAMEMiddle: View {
 
 }
 
-class NAMEBottom: View {
+class N_A_M_EBottom: View {
 
     private lazy var more = AntButton().then{
         addSubview($0)
