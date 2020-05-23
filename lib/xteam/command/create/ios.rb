@@ -37,7 +37,7 @@ module Xteam
                         return
                     end
 
-                    # @name = @name.capitalize
+                    @name = @name.capitalize
 
                     `git clone https://github.com/gg19910817/iOSTemplate #{@name}`
 
